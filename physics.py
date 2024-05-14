@@ -156,7 +156,7 @@ class System:
 
             
             x = (SJ.point1.R - SJ.point2.R).mod
-            Epe = Epe + x**2 * 1
+            Epe = Epe + x**2 * 2
             
         
 
