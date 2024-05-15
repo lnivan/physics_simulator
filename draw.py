@@ -62,10 +62,14 @@ class Window:
 
         self.size = size
         self.white = (255, 255, 255)
+        self.gray = (100, 100, 100)
         self.black = (0, 0, 0)
 
         pygame.init()
         self.window = pygame.display.set_mode(self.size)
+
+        pygame.font.init()
+        self.font = pygame.font.SysFont('Comic Sans MS', 15)
         
 
     def WindowRefresh(self):
@@ -112,7 +116,28 @@ class Window:
 
 
     def DrawButton(self, button):
-        pass
+
+        BGColor = self.white
+
+        if button.MouseOver:
+
+            BGColor = self.gray
+
+        pos = (button.pos.x, self.size[1] - button.pos.y - button.size.y)
+        size = (button.size.x, button.size.y)
+
+        pygame.draw.rect(self.window, BGColor, pygame.Rect(pos, size))
+
+        text = self.font.render(button.name, True, self.black)
+        TextSize = text.get_size()
+        TextPos = (button.pos.x + (button.size.x - TextSize[0]) / 2, self.size[1] - button.pos.y - button.size.y + (button.size.y - TextSize[1]) / 2)
+        self.window.blit(text, TextPos)
+
+
+
+
+        
+        
 
 
 

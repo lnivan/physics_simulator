@@ -63,8 +63,9 @@ class Vector2:
 
 class Button():
 
-    def __init__(self, name, pos, size, func):
+    def __init__(self, name, pos, size, func, ScreenSize):
 
+        self.ScreenSize = ScreenSize
         self.name = name
         self.pos = pos
         self.size = size
@@ -72,13 +73,13 @@ class Button():
         self.MouseOver = False
 
     
-    def Update(self):
+    def Update(self, events):
 
         MousePos = Vector2.PygameVectorToVector2(pygame.mouse.get_pos())
 
         if self.pos.x < MousePos.x and MousePos.x < (self.pos.x + self.size.x):
 
-            if self.pos.y < MousePos.y and MousePos.y < (self.pos.y + self.size.y):
+            if self.ScreenSize[1] - self.pos.y > MousePos.y and MousePos.y > self.ScreenSize[1] - (self.pos.y + self.size.y):
 
                 self.MouseOver = True
 
@@ -90,11 +91,11 @@ class Button():
 
             self.MouseOver = False
 
-        for event in pygame.event.get():
+        for event in events:
 
             if self.MouseOver == True and event.type == pygame.MOUSEBUTTONUP:
 
-                self.func()
+                self.func("hola")
 
 
 

@@ -1,5 +1,6 @@
 from draw import *
 from physics import *
+from UI import *
 import pygame
 import time
 
@@ -88,6 +89,10 @@ sistem.AddSpringJoint("spring12", "point12", "point13", 50, 50000)
 
 
 
+button1 = Button("pause", Vector2(680, 750), Vector2(100, 30), print, WindowSize)
+button2 = Button("point", Vector2(680, 710), Vector2(100, 30), print, WindowSize)
+button3 = Button("spring", Vector2(680, 670), Vector2(100, 30), print, WindowSize)
+
 #sistem.AddMassPoint("point5", Vector2(500, 700), 100, 1000)
 
 
@@ -96,7 +101,9 @@ sistem.AddSpringJoint("spring12", "point12", "point13", 50, 50000)
 running = True
 while running == True:
 
-    for event in pygame.event.get():
+    events = pygame.event.get()
+
+    for event in events:
 
         if event.type == pygame.QUIT:
 
@@ -104,11 +111,17 @@ while running == True:
 
 
     sistem.SimulateStep(0.001)
+    button1.Update(events)
+    button2.Update(events)
+    button3.Update(events)
 
     window.WindowRefresh()
     window.DrawSystem(sistem)
+    window.DrawButton(button1)
+    window.DrawButton(button2)
+    window.DrawButton(button3)
     pygame.display.flip()
 
 
     fps.Update()
-    print(fps.FPS)
+    #print(fps.FPS)
