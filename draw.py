@@ -57,6 +57,7 @@ class Vector2:
 
 
 class Window:
+
     def __init__(self, size):
 
         self.size = size
@@ -108,6 +109,10 @@ class Window:
 
         for spring in system.SpringJointDic.values():
             self.DrawSpring(spring)
+
+
+    def DrawButton(self, button):
+        pass
 
 
 
